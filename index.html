@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AproxCalKu - Discrete Least Squares Fitting Tool</title>
+    
+    <!-- Chart.js dari CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Link ke CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1>📊 AproxCalKu</h1>
+            <p>Discrete Least Squares Fitting Tool</p>
+            <p class="subtitle">Metode Numerik - Curve Fitting & Regression Analysis</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="grid">
+            <!-- Left Panel: Input & Controls -->
+            <aside class="left-panel">
+                <!-- Data Input Section -->
+                <section class="panel">
+                    <h3>📥 Input Data Points</h3>
+                    
+                    <!-- Data Table -->
+                    <div class="table-container">
+                        <table id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th>X</th>
+                                    <th>Y</th>
+                                    <th>Hapus</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <tr>
+                                    <td colspan="3" class="no-data">Belum ada data</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Add Point Form -->
+                    <div class="add-point">
+                        <input type="number" id="inputX" placeholder="X" step="any">
+                        <input type="number" id="inputY" placeholder="Y" step="any">
+                        <button id="btnAdd" class="btn-small">+ Add</button>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="button-group">
+                        <button id="btnLoadExample" class="btn-secondary">📌 Load Contoh</button>
+                        <button id="btnClear" class="btn-danger">🗑️ Clear All</button>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section class="panel">
+                    <h3>⚙️ Pengaturan</h3>
+                    
+                    <div class="form-group">
+                        <label for="fittingType">Tipe Fitting:</label>
+                        <select id="fittingType">
+                            <option value="linear">Linear (y = ax + b)</option>
+                            <option value="quadratic">Quadratic (y = ax² + bx + c)</option>
+                            <option value="cubic">Cubic (y = ax³ + bx² + cx + d)</option>
+                            <option value="poly4">Polynomial Degree 4</option>
+                            <option value="chebyshev">Chebyshev Polynomial</option>
+                            <option value="fourier">Fourier/Trigonometric</option>
+                        </select>
+                    </div>
+
+                    <button id="btnCalculate" class="btn-primary">
+                        🚀 Hitung Fitting
+                    </button>
+                </section>
+
+                <!-- Info Box -->
+                <div class="info-box">
+                    <p><strong>💡 Info:</strong> Pilih metode fitting, masukkan data, lalu klik "Hitung Fitting" untuk melihat hasil aproksimasi.</p>
+                </div>
+            </aside>
+
+            <!-- Right Panel: Visualization & Results -->
+            <section class="right-panel">
+                <!-- Chart Section -->
+                <div class="chart-container">
+                    <h3>📈 Visualisasi Data & Curve Fitting</h3>
+                    <canvas id="mainChart"></canvas>
+                </div>
+
+                <!-- Results Section -->
+                <div id="resultsSection" class="results-section" style="display: none;">
+                    <h3>📊 Hasil Analisis</h3>
+                    
+                    <!-- Equation Card -->
+                    <div class="result-card">
+                        <div class="result-title">Persamaan Fitting:</div>
+                        <div id="equationDisplay" class="equation">-</div>
+                    </div>
+
+                    <!-- Metrics Cards -->
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-label">SSE</div>
+                            <div id="sseValue" class="metric-value">-</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">R²</div>
+                            <div id="r2Value" class="metric-value">-</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">RMSE</div>
+                            <div id="rmseValue" class="metric-value">-</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Max Error</div>
+                            <div id="maxErrorValue" class="metric-value">-</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 AproxCalKu - Dea Anggraini & Qatrunnada Athirah H - PSIK 24 C</p>
+        <p>Universitas Negeri Medan</p>
+    </footer>
+
+    <!-- Link ke JavaScript -->
+    <script src="js/calculations.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

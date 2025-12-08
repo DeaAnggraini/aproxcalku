@@ -1,0 +1,482 @@
+/* ========================================
+   PROFESSIONAL DESIGN - AproxCalKu
+   Dea Anggraini & Qatrunnada Athirah
+   ======================================== */
+
+/* ============ RESET & BASE ============ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #f5f7fa;
+    min-height: 100vh;
+    color: #1f2937;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ============ HEADER ============ */
+
+.header {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 30px 20px;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 2em;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 5px;
+}
+
+.header p {
+    font-size: 1em;
+    color: #6b7280;
+    font-weight: 400;
+}
+
+.subtitle {
+    font-size: 0.875em !important;
+    color: #9ca3af;
+    margin-top: 5px;
+}
+
+/* ============ GRID LAYOUT ============ */
+
+.grid {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 24px;
+    margin-top: 0;
+}
+
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============ PANELS ============ */
+
+.panel {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    margin-bottom: 20px;
+}
+
+.panel h3 {
+    font-size: 1.125em;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f3f4f6;
+}
+
+/* ============ DATA TABLE ============ */
+
+.table-container {
+    max-height: 280px;
+    overflow-y: auto;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+}
+
+thead {
+    background: #f9fafb;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+th {
+    padding: 12px 16px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.875em;
+    color: #374151;
+    border-bottom: 2px solid #e5e7eb;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+td {
+    padding: 12px 16px;
+    text-align: center;
+    border-bottom: 1px solid #f3f4f6;
+    color: #1f2937;
+    font-size: 0.9375em;
+}
+
+tbody tr:hover {
+    background: #f9fafb;
+    transition: background 0.2s;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.no-data {
+    color: #9ca3af;
+    font-style: italic;
+    padding: 24px;
+}
+
+/* ============ FORM ELEMENTS ============ */
+
+.add-point {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.9375em;
+    color: #1f2937;
+    transition: all 0.2s;
+    background: #ffffff;
+}
+
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+input[type="number"]::placeholder {
+    color: #9ca3af;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.875em;
+    margin-bottom: 8px;
+    color: #374151;
+}
+
+/* ============ BUTTONS ============ */
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s;
+    font-size: 0.9375em;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px 20px;
+    background: #2563eb;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.15);
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-small {
+    padding: 10px 16px;
+    background: #2563eb;
+    color: white;
+    font-size: 0.875em;
+}
+
+.btn-small:hover {
+    background: #1d4ed8;
+}
+
+.btn-secondary {
+    flex: 1;
+    padding: 10px 16px;
+    background: #10b981;
+    color: white;
+    font-size: 0.875em;
+}
+
+.btn-secondary:hover {
+    background: #059669;
+}
+
+.btn-danger {
+    flex: 1;
+    padding: 10px 16px;
+    background: #ef4444;
+    color: white;
+    font-size: 0.875em;
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.delete-btn {
+    background: #fef2f2;
+    color: #dc2626;
+    padding: 6px 12px;
+    font-size: 0.8125em;
+    border: 1px solid #fecaca;
+    font-weight: 500;
+}
+
+.delete-btn:hover {
+    background: #fee2e2;
+    border-color: #fca5a5;
+}
+
+/* ============ INFO BOX ============ */
+
+.info-box {
+    background: #eff6ff;
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 3px solid #2563eb;
+}
+
+.info-box p {
+    color: #1e40af;
+    font-size: 0.875em;
+    line-height: 1.6;
+}
+
+.info-box strong {
+    font-weight: 600;
+}
+
+/* ============ CHART SECTION ============ */
+
+.chart-container {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    margin-bottom: 20px;
+}
+
+.chart-container h3 {
+    font-size: 1.125em;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f3f4f6;
+}
+
+#mainChart {
+    max-height: 400px;
+}
+
+/* ============ RESULTS SECTION ============ */
+
+.results-section {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+}
+
+.results-section h3 {
+    font-size: 1.125em;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f3f4f6;
+}
+
+.result-card {
+    background: #f9fafb;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #e5e7eb;
+}
+
+.result-title {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 10px;
+    font-size: 0.875em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.equation {
+    font-family: 'Courier New', 'Consolas', monospace;
+    font-size: 1.125em;
+    color: #2563eb;
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    word-break: break-all;
+    font-weight: 500;
+}
+
+/* ============ METRICS GRID ============ */
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+@media (max-width: 768px) {
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.metric-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.metric-card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+.metric-label {
+    font-size: 0.875em;
+    color: #6b7280;
+    margin-bottom: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.metric-value {
+    font-size: 1.875em;
+    font-weight: 700;
+    color: #2563eb;
+    margin-bottom: 4px;
+}
+
+.metric-desc {
+    font-size: 0.75em;
+    color: #9ca3af;
+    margin-top: 4px;
+}
+
+/* ============ FOOTER ============ */
+
+.footer {
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    color: #6b7280;
+    text-align: center;
+    padding: 24px 20px;
+    margin-top: 40px;
+    font-size: 0.875em;
+}
+
+.footer p {
+    margin: 4px 0;
+}
+
+/* ============ SCROLLBAR ============ */
+
+.table-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* ============ ANIMATIONS ============ */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.results-section {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* ============ UTILITIES ============ */
+
+.text-center {
+    text-align: center;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
