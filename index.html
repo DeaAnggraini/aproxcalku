@@ -13,7 +13,7 @@
     <div id="landingPage" class="landing-page">
         <div class="landing-container">
             <div class="landing-content">
-                <h1 class="landing-title">AproxCalKu</h1>
+                <h1 class="landing-title">APROXCALKU</h1>
                 <p class="landing-subtitle">Alat Bantu Pembelajaran Aproksimasi Fungsi</p>
                 <p class="landing-desc">
                     Pelajari dan terapkan metode Discrete Least Squares untuk curve fitting dengan berbagai teknik aproksimasi. 
@@ -22,17 +22,14 @@
                 
                 <div class="landing-features">
                     <div class="feature-card">
-                        <div class="feature-icon">📊</div>
                         <h3>6 Metode Fitting</h3>
                         <p>Linear, Quadratic, Cubic, Polynomial, Chebyshev, dan Fourier</p>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon">📈</div>
                         <h3>Visualisasi Real-time</h3>
                         <p>Grafik interaktif dengan zoom dan pan untuk analisis detail</p>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon">🎯</div>
                         <h3>Analisis Error</h3>
                         <p>SSE, R², RMSE, dan Max Error untuk evaluasi akurasi</p>
                     </div>
@@ -40,10 +37,10 @@
 
                 <div class="landing-buttons">
                     <button id="btnStartCalculator" class="btn-landing btn-primary-landing">
-                        🚀 Mulai Kalkulator
+                        Mulai Kalkulator
                     </button>
                     <button id="btnLearnMaterial" class="btn-landing btn-secondary-landing">
-                        📚 Belajar Materi
+                        Belajar Materi
                     </button>
                 </div>
 
@@ -61,7 +58,7 @@
         <header class="header">
             <div class="container">
                 <button id="btnBackFromMaterial" class="btn-back">← Kembali</button>
-                <h1>📚 Materi Aproksimasi</h1>
+                <h1>Materi Aproksimasi</h1>
                 <p>Discrete Least Squares Approximation</p>
             </div>
         </header>
@@ -156,7 +153,7 @@
         <header class="header">
             <div class="container">
                 <button id="btnBackFromCalc" class="btn-back">← Kembali</button>
-                <h1>📊 AproxCalKu</h1>
+                <h1>APROXCALKU</h1>
                 <p>Discrete Least Squares Fitting Tool</p>
             </div>
         </header>
@@ -165,7 +162,7 @@
             <div class="grid">
                 <aside class="left-panel">
                     <section class="panel">
-                        <h3>📥 Input Data Points</h3>
+                        <h3>Input Data Points</h3>
                         
                         <div class="table-container">
                             <table id="dataTable">
@@ -191,48 +188,47 @@
                         </div>
 
                         <div class="button-group">
-                            <button id="btnLoadExample" class="btn-secondary">📌 Load Contoh</button>
-                            <button id="btnClear" class="btn-danger">🗑️ Clear All</button>
+                            <button id="btnLoadExample" class="btn-secondary">Load Contoh</button>
+                            <button id="btnClear" class="btn-danger">Clear All</button>
                         </div>
                     </section>
 
                     <section class="panel">
-                        <h3>⚙️ Pengaturan</h3>
+                        <h3>Pengaturan</h3>
                         
                         <div class="form-group">
                             <label for="fittingType">Tipe Fitting:</label>
-                            <select id="fittingType" class="input-field">
+                            <select id="fittingType">
                                 <option value="linear">Linear (y = ax + b)</option>
-                                <option value="quadratic">Quadratic - Least Squares (y = ax² + bx + c)</option>
+                                <option value="quadratic">Quadratic (y = ax² + bx + c)</option>
                                 <option value="cubic">Cubic (y = ax³ + bx² + cx + d)</option>
                                 <option value="poly4">Polynomial Degree 4</option>
                                 <option value="chebyshev">Chebyshev Polynomial</option>
-                                <option value="trigonometric">Trigonometric Polynomial</option>
-                                <option value="fourier">Fourier Series</option>
+                                <option value="fourier">Fourier/Trigonometric</option>
                             </select>
                         </div>
 
                         <button id="btnCalculate" class="btn-primary">
-                            🚀 Hitung Fitting
+                            Hitung Fitting
                         </button>
                     </section>
 
                     <div class="info-box">
-                        <p><strong>💡 Tip:</strong> Gunakan scroll wheel di grafik untuk zoom in/out. Klik dan drag untuk pan.</p>
+                        <p><strong>Tip:</strong> Gunakan scroll wheel di grafik untuk zoom in/out. Klik dan drag untuk pan.</p>
                     </div>
                 </aside>
 
                 <section class="right-panel">
                     <div class="chart-container">
-                        <h3>📈 Visualisasi Data & Curve Fitting</h3>
+                        <h3>Visualisasi Data & Curve Fitting</h3>
                         <div class="chart-controls">
-                            <button id="btnResetZoom" class="btn-chart-control">🔄 Reset Zoom</button>
+                            <button id="btnResetZoom" class="btn-chart-control">Reset Zoom</button>
                         </div>
                         <canvas id="mainChart"></canvas>
                     </div>
 
                     <div id="resultsSection" class="results-section" style="display: none;">
-                        <h3>📊 Hasil Analisis</h3>
+                        <h3>Hasil Analisis</h3>
                         
                         <div class="result-card">
                             <div class="result-title">Persamaan Fitting:</div>

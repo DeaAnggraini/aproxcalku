@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Enter') addDataPoint();
     });
     
-    console.log('🚀 AproxCalKu initialized successfully!');
+    console.log('AproxCalKu initialized successfully!');
 });
 
 function showLandingPage() {
@@ -81,7 +81,7 @@ function addDataPoint() {
     const y = parseFloat(elements.inputY.value);
     
     if (isNaN(x) || isNaN(y)) {
-        alert('⚠️ Masukkan nilai X dan Y yang valid!');
+        alert('Masukkan nilai X dan Y yang valid!');
         return;
     }
     
@@ -103,7 +103,7 @@ function deleteDataPoint(index) {
 function clearAllData() {
     if (dataPoints.length === 0) return;
     
-    if (confirm('🗑️ Hapus semua data?')) {
+    if (confirm('Hapus semua data?')) {
         dataPoints = [];
         updateTable();
         updateChart();
@@ -123,7 +123,7 @@ function loadExampleData() {
     
     updateTable();
     updateChart();
-    alert('✅ Data contoh berhasil dimuat!');
+    alert('Data contoh berhasil dimuat!');
 }
 
 // ============ TABLE UPDATE ============
@@ -287,7 +287,7 @@ function resetChartZoom() {
 
 function calculateFitting() {
     if (dataPoints.length < 2) {
-        alert('⚠️ Minimal 2 data points untuk fitting!');
+        alert('Minimal 2 data points untuk fitting!');
         return;
     }
     
@@ -327,7 +327,7 @@ function calculateFitting() {
         updateChartWithFitting(result);
         
     } catch (error) {
-        alert('❌ Error dalam perhitungan: ' + error.message);
+        alert('Error dalam perhitungan: ' + error.message);
         console.error(error);
     }
 }
@@ -351,7 +351,7 @@ function displayResults(result, metrics) {
     `;
     
     elements.resultsSection.innerHTML = `
-        <h3>📊 Hasil Analisis</h3>
+        <h3>Hasil Analisis</h3>
         ${equationCard}
         <div class="metrics-grid">
             ${generateMetricCard('SSE', metrics.sse.toFixed(4), 'Sum of Squared Errors', 'sseSteps', generateSSESteps(dataPoints, result.predict))}
