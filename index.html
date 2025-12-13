@@ -4,140 +4,274 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AproxCalKu - Discrete Least Squares Fitting Tool</title>
-    
-    <!-- Chart.js dari CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <!-- Link ke CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <h1>📊 AproxCalKu</h1>
-            <p>Discrete Least Squares Fitting Tool</p>
-            <p class="subtitle">Metode Numerik - Curve Fitting & Regression Analysis</p>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="container">
-        <div class="grid">
-            <!-- Left Panel: Input & Controls -->
-            <aside class="left-panel">
-                <!-- Data Input Section -->
-                <section class="panel">
-                    <h3>📥 Input Data Points</h3>
-                    
-                    <!-- Data Table -->
-                    <div class="table-container">
-                        <table id="dataTable">
-                            <thead>
-                                <tr>
-                                    <th>X</th>
-                                    <th>Y</th>
-                                    <th>Hapus</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tableBody">
-                                <tr>
-                                    <td colspan="3" class="no-data">Belum ada data</td>
-                                </tr>
-                            </tbody>
-                        </table>
+    <!-- Landing Page -->
+    <div id="landingPage" class="landing-page">
+        <div class="landing-container">
+            <div class="landing-content">
+                <h1 class="landing-title">AproxCalKu</h1>
+                <p class="landing-subtitle">Alat Bantu Pembelajaran Aproksimasi Fungsi</p>
+                <p class="landing-desc">
+                    Pelajari dan terapkan metode Discrete Least Squares untuk curve fitting dengan berbagai teknik aproksimasi. 
+                    Platform interaktif untuk memahami konsep aproksimasi polinomial, Chebyshev, dan Fourier secara visual dan praktis.
+                </p>
+                
+                <div class="landing-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>6 Metode Fitting</h3>
+                        <p>Linear, Quadratic, Cubic, Polynomial, Chebyshev, dan Fourier</p>
                     </div>
-
-                    <!-- Add Point Form -->
-                    <div class="add-point">
-                        <input type="number" id="inputX" placeholder="X" step="any">
-                        <input type="number" id="inputY" placeholder="Y" step="any">
-                        <button id="btnAdd" class="btn-small">+ Add</button>
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3>Visualisasi Real-time</h3>
+                        <p>Grafik interaktif dengan zoom dan pan untuk analisis detail</p>
                     </div>
-
-                    <!-- Action Buttons -->
-                    <div class="button-group">
-                        <button id="btnLoadExample" class="btn-secondary">📌 Load Contoh</button>
-                        <button id="btnClear" class="btn-danger">🗑️ Clear All</button>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Analisis Error</h3>
+                        <p>SSE, R², RMSE, dan Max Error untuk evaluasi akurasi</p>
                     </div>
-                </section>
+                </div>
 
-                <!-- Settings Section -->
-                <section class="panel">
-                    <h3>⚙️ Pengaturan</h3>
-                    
-                    <div class="form-group">
-                        <label for="fittingType">Tipe Fitting:</label>
-                        <select id="fittingType">
-                            <option value="linear">Linear (y = ax + b)</option>
-                            <option value="quadratic">Quadratic (y = ax² + bx + c)</option>
-                            <option value="cubic">Cubic (y = ax³ + bx² + cx + d)</option>
-                            <option value="poly4">Polynomial Degree 4</option>
-                            <option value="chebyshev">Chebyshev Polynomial</option>
-                            <option value="fourier">Fourier/Trigonometric</option>
-                        </select>
-                    </div>
-
-                    <button id="btnCalculate" class="btn-primary">
-                        🚀 Hitung Fitting
+                <div class="landing-buttons">
+                    <button id="btnStartCalculator" class="btn-landing btn-primary-landing">
+                        🚀 Mulai Kalkulator
                     </button>
+                    <button id="btnLearnMaterial" class="btn-landing btn-secondary-landing">
+                        📚 Belajar Materi
+                    </button>
+                </div>
+
+                <div class="landing-info">
+                    <p><strong>Dibuat oleh:</strong> Dea Anggraini & Qatrunnada Athirah</p>
+                    <p><strong>Program Studi:</strong> Ilmu Komputer 24 C - Universitas Negeri Medan</p>
+                    <p><strong>Mata Kuliah:</strong> Metode Numerik</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Material Page -->
+    <div id="materialPage" class="material-page" style="display: none;">
+        <header class="header">
+            <div class="container">
+                <button id="btnBackFromMaterial" class="btn-back">← Kembali</button>
+                <h1>📚 Materi Aproksimasi</h1>
+                <p>Discrete Least Squares Approximation</p>
+            </div>
+        </header>
+
+        <main class="container">
+            <div class="material-content">
+                <section class="material-section">
+                    <h2>Apa itu Aproksimasi?</h2>
+                    <p>Aproksimasi adalah metode untuk mendekati fungsi atau data kompleks dengan representasi yang lebih sederhana. 
+                    Dalam konteks curve fitting, kita mencari fungsi matematis yang paling cocok dengan sekumpulan data points.</p>
                 </section>
 
-                <!-- Info Box -->
-                <div class="info-box">
-                    <p><strong>💡 Info:</strong> Pilih metode fitting, masukkan data, lalu klik "Hitung Fitting" untuk melihat hasil aproksimasi.</p>
-                </div>
-            </aside>
+                <section class="material-section">
+                    <h2>Metode Least Squares</h2>
+                    <p>Metode Least Squares meminimalkan jumlah kuadrat error antara data aktual dengan fungsi aproksimasi:</p>
+                    <div class="formula">
+                        SSE = Σ(yᵢ - ŷᵢ)²
+                    </div>
+                    <p>Di mana yᵢ adalah nilai aktual dan ŷᵢ adalah nilai hasil aproksimasi.</p>
+                </section>
 
-            <!-- Right Panel: Visualization & Results -->
-            <section class="right-panel">
-                <!-- Chart Section -->
-                <div class="chart-container">
-                    <h3>📈 Visualisasi Data & Curve Fitting</h3>
-                    <canvas id="mainChart"></canvas>
-                </div>
-
-                <!-- Results Section -->
-                <div id="resultsSection" class="results-section" style="display: none;">
-                    <h3>📊 Hasil Analisis</h3>
+                <section class="material-section">
+                    <h2>6 Metode yang Tersedia</h2>
                     
-                    <!-- Equation Card -->
-                    <div class="result-card">
-                        <div class="result-title">Persamaan Fitting:</div>
-                        <div id="equationDisplay" class="equation">-</div>
+                    <div class="method-card">
+                        <h3>1. Linear Fitting</h3>
+                        <p><strong>Persamaan:</strong> y = ax + b</p>
+                        <p>Digunakan untuk data dengan hubungan linear. Metode tercepat dan paling sederhana.</p>
                     </div>
 
-                    <!-- Metrics Cards -->
-                    <div class="metrics-grid">
-                        <div class="metric-card">
-                            <div class="metric-label">SSE</div>
-                            <div id="sseValue" class="metric-value">-</div>
+                    <div class="method-card">
+                        <h3>2. Quadratic Fitting</h3>
+                        <p><strong>Persamaan:</strong> y = ax² + bx + c</p>
+                        <p>Cocok untuk data yang membentuk parabola atau kurva sederhana.</p>
+                    </div>
+
+                    <div class="method-card">
+                        <h3>3. Cubic Fitting</h3>
+                        <p><strong>Persamaan:</strong> y = ax³ + bx² + cx + d</p>
+                        <p>Untuk data dengan satu atau dua titik belok.</p>
+                    </div>
+
+                    <div class="method-card">
+                        <h3>4. Polynomial Degree 4</h3>
+                        <p><strong>Persamaan:</strong> y = a₄x⁴ + a₃x³ + a₂x² + a₁x + a₀</p>
+                        <p>Untuk data dengan pola yang lebih kompleks.</p>
+                    </div>
+
+                    <div class="method-card">
+                        <h3>5. Chebyshev Polynomial</h3>
+                        <p>Menggunakan basis Chebyshev yang meminimalkan error maksimum.</p>
+                        <p>Cocok untuk aproksimasi fungsi pada interval tertentu.</p>
+                    </div>
+
+                    <div class="method-card">
+                        <h3>6. Fourier/Trigonometric</h3>
+                        <p><strong>Persamaan:</strong> y = a₀/2 + Σ[aₙcos(nx) + bₙsin(nx)]</p>
+                        <p>Ideal untuk data periodik atau yang memiliki pola berulang.</p>
+                    </div>
+                </section>
+
+                <section class="material-section">
+                    <h2>Metrik Evaluasi</h2>
+                    
+                    <div class="metric-explanation">
+                        <h3>SSE (Sum of Squared Errors)</h3>
+                        <p>Total dari kuadrat semua error. Semakin kecil semakin baik.</p>
+                    </div>
+
+                    <div class="metric-explanation">
+                        <h3>R² (Coefficient of Determination)</h3>
+                        <p>Mengukur seberapa baik model menjelaskan variasi data. Range: 0-1. 
+                        R² = 1 berarti perfect fit.</p>
+                    </div>
+
+                    <div class="metric-explanation">
+                        <h3>RMSE (Root Mean Square Error)</h3>
+                        <p>Akar dari rata-rata kuadrat error. Dalam satuan yang sama dengan Y.</p>
+                    </div>
+
+                    <div class="metric-explanation">
+                        <h3>Max Error</h3>
+                        <p>Error terbesar di antara semua data points.</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Calculator App -->
+    <div id="calculatorApp" style="display: none;">
+        <header class="header">
+            <div class="container">
+                <button id="btnBackFromCalc" class="btn-back">← Kembali</button>
+                <h1>📊 AproxCalKu</h1>
+                <p>Discrete Least Squares Fitting Tool</p>
+            </div>
+        </header>
+
+        <main class="container">
+            <div class="grid">
+                <aside class="left-panel">
+                    <section class="panel">
+                        <h3>📥 Input Data Points</h3>
+                        
+                        <div class="table-container">
+                            <table id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>X</th>
+                                        <th>Y</th>
+                                        <th>Hapus</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody">
+                                    <tr>
+                                        <td colspan="3" class="no-data">Belum ada data</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="metric-card">
-                            <div class="metric-label">R²</div>
-                            <div id="r2Value" class="metric-value">-</div>
+
+                        <div class="add-point">
+                            <input type="number" id="inputX" placeholder="X" step="any">
+                            <input type="number" id="inputY" placeholder="Y" step="any">
+                            <button id="btnAdd" class="btn-small">+ Add</button>
                         </div>
-                        <div class="metric-card">
-                            <div class="metric-label">RMSE</div>
-                            <div id="rmseValue" class="metric-value">-</div>
+
+                        <div class="button-group">
+                            <button id="btnLoadExample" class="btn-secondary">📌 Load Contoh</button>
+                            <button id="btnClear" class="btn-danger">🗑️ Clear All</button>
                         </div>
-                        <div class="metric-card">
-                            <div class="metric-label">Max Error</div>
-                            <div id="maxErrorValue" class="metric-value">-</div>
+                    </section>
+
+                    <section class="panel">
+                        <h3>⚙️ Pengaturan</h3>
+                        
+                        <div class="form-group">
+                            <label for="fittingType">Tipe Fitting:</label>
+                            <select id="fittingType" class="input-field">
+                                <option value="linear">Linear (y = ax + b)</option>
+                                <option value="quadratic">Quadratic - Least Squares (y = ax² + bx + c)</option>
+                                <option value="cubic">Cubic (y = ax³ + bx² + cx + d)</option>
+                                <option value="poly4">Polynomial Degree 4</option>
+                                <option value="chebyshev">Chebyshev Polynomial</option>
+                                <option value="trigonometric">Trigonometric Polynomial</option>
+                                <option value="fourier">Fourier Series</option>
+                            </select>
+                        </div>
+
+                        <button id="btnCalculate" class="btn-primary">
+                            🚀 Hitung Fitting
+                        </button>
+                    </section>
+
+                    <div class="info-box">
+                        <p><strong>💡 Tip:</strong> Gunakan scroll wheel di grafik untuk zoom in/out. Klik dan drag untuk pan.</p>
+                    </div>
+                </aside>
+
+                <section class="right-panel">
+                    <div class="chart-container">
+                        <h3>📈 Visualisasi Data & Curve Fitting</h3>
+                        <div class="chart-controls">
+                            <button id="btnResetZoom" class="btn-chart-control">🔄 Reset Zoom</button>
+                        </div>
+                        <canvas id="mainChart"></canvas>
+                    </div>
+
+                    <div id="resultsSection" class="results-section" style="display: none;">
+                        <h3>📊 Hasil Analisis</h3>
+                        
+                        <div class="result-card">
+                            <div class="result-title">Persamaan Fitting:</div>
+                            <div id="equationDisplay" class="equation">-</div>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-label">SSE</div>
+                                <div id="sseValue" class="metric-value">-</div>
+                                <div class="metric-desc">Sum of Squared Errors</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">R²</div>
+                                <div id="r2Value" class="metric-value">-</div>
+                                <div class="metric-desc">Goodness of Fit</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">RMSE</div>
+                                <div id="rmseValue" class="metric-value">-</div>
+                                <div class="metric-desc">Root Mean Square Error</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Max Error</div>
+                                <div id="maxErrorValue" class="metric-value">-</div>
+                                <div class="metric-desc">Maximum Absolute Error</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-        </div>
-    </main>
+                </section>
+            </div>
+        </main>
+    </div>
 
-    <!-- Footer -->
     <footer class="footer">
-        <p>© 2025 AproxCalKu - Dea Anggraini & Qatrunnada Athirah H - PSIK 24 C</p>
+        <p>© 2025 AproxCalKu - Dea Anggraini & Qatrunnada Athirah - PSIK 24 C</p>
         <p>Universitas Negeri Medan</p>
     </footer>
 
-    <!-- Link ke JavaScript -->
     <script src="js/calculations.js"></script>
     <script src="js/main.js"></script>
 </body>

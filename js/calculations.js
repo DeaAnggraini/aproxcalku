@@ -1,5 +1,6 @@
 // ========================================
 // DISCRETE LEAST SQUARES CALCULATIONS
+// Dea Anggraini & Qatrunnada Athirah
 // ========================================
 
 // ============ HELPER FUNCTIONS ============
@@ -122,9 +123,10 @@ function calculatePolynomial(dataPoints, degree) {
         }
     });
     
-    const typeName = degree === 2 ? 'Quadratic' : 
-                     degree === 3 ? 'Cubic' : 
-                     `Polynomial deg-${degree}`;
+const typeName = degree === 2 ? 'Quadratic - Least Squares' : 
+                 degree === 3 ? 'Cubic' : 
+                 degree === 4 ? 'Polynomial Degree 4' :
+                 `Polynomial deg-${degree}`;
     
     return {
         coeffs,
@@ -197,7 +199,64 @@ function calculateChebyshev(dataPoints, degree) {
     };
 }
 
-// ============ FOURIER APPROXIMATION ============
+// ============ TRIGONOMETRIC POLYNOMIAL ============
+
+function calculateTrigonometric(data, order = 3) {
+    const n = data.length;
+    const xMin = Math.min(...data.map(p => p.x));
+    const xMax = Math.max(...data.map(p => p.x));
+    const period = xMax - xMin;
+    const omega = 2 * Math.PI / period;
+    
+    // Number of basis functions: 1 + 2*order (constant + cos/sin pairs)
+    const numBasis = 1 + 2 * order;
+    
+    // Build design matrix A
+    const A = [];
+    for (let i = 0; i < n; i++) {
+        const row = [1]; // constant term
+        for (let k = 1; k <= order; k++) {
+            row.push(Math.cos(k * omega * data[i].x));
+            row.push(Math.sin(k * omega * data[i].x));
+        }
+        A.push(row);
+    }
+    
+    // Build b vector
+    const b = data.map(p => p.y);
+    
+    // Solve normal equations: (A^T A) x = A^T b
+    const AT = transpose(A);
+    const ATA = matrixMultiply(AT, A);
+    const ATb = matrixVectorMultiply(AT, b);
+    
+    const coeffs = solveLinearSystem(ATA, ATb);
+    
+    // Build equation string
+    let equation = `y = ${coeffs[0].toFixed(4)}`;
+    for (let k = 1; k <= order; k++) {
+        const cosCoeff = coeffs[2*k - 1];
+        const sinCoeff = coeffs[2*k];
+        equation += ` ${cosCoeff >= 0 ? '+' : ''}${cosCoeff.toFixed(4)}cos(${k}x)`;
+        equation += ` ${sinCoeff >= 0 ? '+' : ''}${sinCoeff.toFixed(4)}sin(${k}x)`;
+    }
+    
+    return {
+        type: 'Trigonometric Polynomial',
+        coeffs: coeffs,
+        equation: equation,
+        predict: (x) => {
+            let result = coeffs[0];
+            for (let k = 1; k <= order; k++) {
+                result += coeffs[2*k - 1] * Math.cos(k * omega * x);
+                result += coeffs[2*k] * Math.sin(k * omega * x);
+            }
+            return result;
+        }
+    };
+}
+
+// ============ FOURIER SERIES ============
 
 function calculateFourier(dataPoints, nTerms) {
     const n = dataPoints.length;
@@ -257,7 +316,7 @@ function calculateFourier(dataPoints, nTerms) {
             }
             return result;
         },
-        type: 'Fourier'
+        type: 'Fourier Series'
     };
 }
 
@@ -281,4 +340,96 @@ function calculateMetrics(dataPoints, predictFunc) {
     const rmse = Math.sqrt(sse / dataPoints.length);
     
     return { sse, r2, rmse, maxError };
+}
+
+// ============ MATRIX HELPER FUNCTIONS ============
+
+function transpose(matrix) {
+    const rows = matrix.length;
+    const cols = matrix[0].length;
+    const result = [];
+    
+    for (let j = 0; j < cols; j++) {
+        const row = [];
+        for (let i = 0; i < rows; i++) {
+            row.push(matrix[i][j]);
+        }
+        result.push(row);
+    }
+    
+    return result;
+}
+
+function matrixMultiply(A, B) {
+    const rowsA = A.length;
+    const colsA = A[0].length;
+    const colsB = B[0].length;
+    const result = [];
+    
+    for (let i = 0; i < rowsA; i++) {
+        const row = [];
+        for (let j = 0; j < colsB; j++) {
+            let sum = 0;
+            for (let k = 0; k < colsA; k++) {
+                sum += A[i][k] * B[k][j];
+            }
+            row.push(sum);
+        }
+        result.push(row);
+    }
+    
+    return result;
+}
+
+function matrixVectorMultiply(A, b) {
+    const rows = A.length;
+    const result = [];
+    
+    for (let i = 0; i < rows; i++) {
+        let sum = 0;
+        for (let j = 0; j < A[i].length; j++) {
+            sum += A[i][j] * b[j];
+        }
+        result.push(sum);
+    }
+    
+    return result;
+}
+
+function solveLinearSystem(A, b) {
+    // Gaussian elimination with partial pivoting
+    const n = A.length;
+    const augmented = A.map((row, i) => [...row, b[i]]);
+    
+    // Forward elimination
+    for (let i = 0; i < n; i++) {
+        // Partial pivoting
+        let maxRow = i;
+        for (let k = i + 1; k < n; k++) {
+            if (Math.abs(augmented[k][i]) > Math.abs(augmented[maxRow][i])) {
+                maxRow = k;
+            }
+        }
+        [augmented[i], augmented[maxRow]] = [augmented[maxRow], augmented[i]];
+        
+        // Eliminate column
+        for (let k = i + 1; k < n; k++) {
+            const factor = augmented[k][i] / augmented[i][i];
+            for (let j = i; j < n + 1; j++) {
+                augmented[k][j] -= factor * augmented[i][j];
+            }
+        }
+    }
+    
+    // Back substitution
+    const x = new Array(n);
+    for (let i = n - 1; i >= 0; i--) {
+        x[i] = augmented[i][n];
+        for (let j = i + 1; j < n; j++) {
+            x[i] -= augmented[i][j] * x[j];
+        }
+        x[i] /= augmented[i][i];
+    }
+    
+    return x;
 }
