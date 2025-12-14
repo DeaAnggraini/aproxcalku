@@ -22,8 +22,8 @@
                 
                 <div class="landing-features">
                     <div class="feature-card">
-                        <h3>6 Metode Fitting</h3>
-                        <p>Linear, Quadratic, Cubic, Polynomial, Chebyshev, dan Fourier</p>
+                        <h3>7 Metode Fitting</h3>
+                        <p>Linear, Quadratic, Cubic, Polynomial Deg-4, Chebyshev, Trigonometric, dan Fourier</p>
                     </div>
                     <div class="feature-card">
                         <h3>Visualisasi Real-time</h3>
@@ -81,7 +81,7 @@
                 </section>
 
                 <section class="material-section">
-                    <h2>6 Metode yang Tersedia</h2>
+                    <h2>7 Metode yang Tersedia</h2>
                     
                     <div class="method-card">
                         <h3>1. Linear Fitting</h3>
@@ -90,9 +90,9 @@
                     </div>
 
                     <div class="method-card">
-                        <h3>2. Quadratic Fitting</h3>
+                        <h3>2. Quadratic Fitting - Least Squares</h3>
                         <p><strong>Persamaan:</strong> y = ax² + bx + c</p>
-                        <p>Cocok untuk data yang membentuk parabola atau kurva sederhana.</p>
+                        <p>Cocok untuk data yang membentuk parabola atau kurva sederhana menggunakan metode Least Squares.</p>
                     </div>
 
                     <div class="method-card">
@@ -104,19 +104,25 @@
                     <div class="method-card">
                         <h3>4. Polynomial Degree 4</h3>
                         <p><strong>Persamaan:</strong> y = a₄x⁴ + a₃x³ + a₂x² + a₁x + a₀</p>
-                        <p>Untuk data dengan pola yang lebih kompleks.</p>
+                        <p>Untuk data dengan pola yang lebih kompleks dan multiple turning points.</p>
                     </div>
 
                     <div class="method-card">
                         <h3>5. Chebyshev Polynomial</h3>
-                        <p>Menggunakan basis Chebyshev yang meminimalkan error maksimum.</p>
-                        <p>Cocok untuk aproksimasi fungsi pada interval tertentu.</p>
+                        <p><strong>Basis:</strong> T₀(x)=1, T₁(x)=x, T₂(x)=2x²-1, ...</p>
+                        <p>Menggunakan basis Chebyshev yang meminimalkan error maksimum. Cocok untuk aproksimasi fungsi pada interval tertentu dengan konvergensi optimal.</p>
                     </div>
 
                     <div class="method-card">
-                        <h3>6. Fourier/Trigonometric</h3>
+                        <h3>6. Trigonometric Polynomial</h3>
+                        <p><strong>Persamaan:</strong> Kombinasi polynomial dengan fungsi trigonometri</p>
+                        <p>Metode aproksimasi menggunakan basis trigonometri untuk data dengan karakteristik periodik parsial.</p>
+                    </div>
+
+                    <div class="method-card">
+                        <h3>7. Fourier Series</h3>
                         <p><strong>Persamaan:</strong> y = a₀/2 + Σ[aₙcos(nx) + bₙsin(nx)]</p>
-                        <p>Ideal untuk data periodik atau yang memiliki pola berulang.</p>
+                        <p>Ideal untuk data periodik atau yang memiliki pola berulang. Menggunakan deret Fourier untuk dekomposisi sinyal.</p>
                     </div>
                 </section>
 
@@ -126,22 +132,25 @@
                     <div class="metric-explanation">
                         <h3>SSE (Sum of Squared Errors)</h3>
                         <p>Total dari kuadrat semua error. Semakin kecil semakin baik.</p>
+                        <div class="formula">SSE = Σ(yᵢ - ŷᵢ)²</div>
                     </div>
 
                     <div class="metric-explanation">
                         <h3>R² (Coefficient of Determination)</h3>
-                        <p>Mengukur seberapa baik model menjelaskan variasi data. Range: 0-1. 
-                        R² = 1 berarti perfect fit.</p>
+                        <p>Mengukur seberapa baik model menjelaskan variasi data. Range: 0-1. R² = 1 berarti perfect fit.</p>
+                        <div class="formula">R² = 1 - (SSE / SST)</div>
                     </div>
 
                     <div class="metric-explanation">
                         <h3>RMSE (Root Mean Square Error)</h3>
                         <p>Akar dari rata-rata kuadrat error. Dalam satuan yang sama dengan Y.</p>
+                        <div class="formula">RMSE = √(SSE / n)</div>
                     </div>
 
                     <div class="metric-explanation">
                         <h3>Max Error</h3>
                         <p>Error terbesar di antara semua data points.</p>
+                        <div class="formula">Max Error = max|yᵢ - ŷᵢ|</div>
                     </div>
                 </section>
             </div>
